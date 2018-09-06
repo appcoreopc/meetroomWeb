@@ -1,8 +1,13 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
+import { addUser } from '../../actions/index';
 
 class AdminTab extends React.Component {
 
     public render() {
+
+        let a:any  = this.props;
+        console.log(a.dispatch);
 
         return (   
                         
@@ -22,8 +27,15 @@ class AdminTab extends React.Component {
             <img src="images/img.jpg" alt="..." className="img-circle profile_img" />
             </div>
             <div className="profile_info">
-            <span>Welcome,</span>
-            <h2>John Doe</h2>
+            <span>Welcome111,</span>
+            <h2>John Doe11</h2> 
+
+            <button onClick={() => {
+
+                console.log('test');
+                a.dispatch(addUser('test'));
+                              
+            }}> Click me! </button>
             </div>
             </div>
                         
@@ -132,8 +144,7 @@ class AdminTab extends React.Component {
             <li><a href="javascript:void(0)"><i className="fa fa-laptop"/> Landing Page <span className="label label-success pull-right">Coming Soon</span></a></li>
             </ul>
             </div>
-                       
-            
+                                   
             <div className="sidebar-footer hidden-small">
             <a data-toggle="tooltip" data-placement="top" title="Settings">
             <span className="glyphicon glyphicon-cog" aria-hidden="true"/>
@@ -160,5 +171,4 @@ class AdminTab extends React.Component {
     }
 }
 
-
-export default AdminTab;
+export default connect()(AdminTab);

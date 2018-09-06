@@ -1,9 +1,11 @@
+export const addUser = (text : string) => {
 
-
-export const addUser = (text : string) => ({
+    console.log('dispatching adduser');
+    return {
     type: 'ADD_USER',    
     text
-});
+    }    
+};
 
 export const removeUser = (text : string) => ({
     type: 'REMOVE_USER',    

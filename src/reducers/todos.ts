@@ -1,4 +1,3 @@
-
 type Action = ActionA;
 
 interface ActionA {
@@ -7,9 +6,11 @@ interface ActionA {
     id : string
 }
 
-const todos = (state = [], action : Action) => {
+const todos = (state:any = [], action : Action) => {
   switch (action.type) {
-    case 'ADD_TODO':
+    case 'ADD_USER':
+      console.log('reducer logging todo');
+
       return [
         ...state,
         {
@@ -18,6 +19,8 @@ const todos = (state = [], action : Action) => {
           completed: false
         }
       ]
+    case 'TEST': 
+       console.log('test')
     // case 'TOGGLE_TODO':
     //   return state.map(todo =>
     //     (todo.id === action.id)
