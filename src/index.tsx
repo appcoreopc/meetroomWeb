@@ -5,6 +5,8 @@ import AdminTab from './components/adminTab/adminTab';
 import Footer from './components/footer/footer';
 import TopNavigation from './components/topNavigation/topNavigation';
 import TopTiles from './components/topNavigation/topTiles';
+import MainContent from './components/content/mainContent';
+import TransactionSummary from './components/content/transactionSummary';
 
 
 ReactDOM.render(
@@ -13,7 +15,10 @@ ReactDOM.render(
          <AdminTab />
          <Footer />
          <TopNavigation />
-         <TopTiles />         
+         <TopTiles />    
+         <MainContent />  
+         <TransactionSummary />
+            
      </div>   
    ,
     document.getElementById("example")
