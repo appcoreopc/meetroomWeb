@@ -1,23 +1,26 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import createSagaMiddleware from 'redux-saga'
 
 import AdminTab from './components/adminTab/adminTab';
-import Footer from './components/footer/footer';
-import TopNavigation from './components/topNavigation/topNavigation';
-import TopTiles from './components/topNavigation/topTiles';
 import MainContent from './components/content/mainContent';
-import TransactionSummary from './components/content/transactionSummary';
-import { render } from 'react-dom';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import rootReducer from './reducers/index';
 import { Route, HashRouter, Switch } from 'react-router-dom';
-import {MembersPage} from './components/user/member';
-import {About } from './components/user/about';
+import { MembersPage } from './components/user/member';
+import { About } from './components/user/about';
 import  App from './App';
 import UserContent from './components/user/main';
+import userSaga from './components/user/usersaga';
 
-const store = createStore(rootReducer) 
+const sagaMiddleware = createSagaMiddleware();
+
+const store = createStore(rootReducer,  
+    applyMiddleware(sagaMiddleware)
+);
+
+sagaMiddleware.run(userSaga);
 
 ReactDOM.render(
            
