@@ -11,14 +11,30 @@ import { render } from 'react-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import rootReducer from './reducers/index';
-
-
+import { Route, HashRouter, Switch } from 'react-router-dom';
+import {MembersPage} from './components/user/member';
+import {About } from './components/user/about';
+import {Main} from './components/user/main';
 const store = createStore(rootReducer) 
 
 ReactDOM.render(
        
-    <Provider store={store}>    
+    <Provider store={store}> 
+        
     <div>
+
+      <HashRouter>
+            <div className="container-fluid">
+            <Route component={Main} />
+            <Switch>
+                <Route exact path="/" component={Main} />
+                <Route path="/about" component={About} />
+                <Route path="/members" component={MembersPage} />
+            </Switch>
+            </div>
+        </HashRouter>
+
+
         <AdminTab />
         <Footer />
         <TopNavigation />
