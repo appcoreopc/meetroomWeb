@@ -74,6 +74,16 @@ class MainContent extends React.Component {
                </div>
                <div>
                  <p>Bill boards</p>
+
+                 <aside className="primary-aside">
+                 <ul>
+                   <li><Link to="/">Home</Link></li>
+                   <li><Link to="/about">about</Link></li>
+                   <li><Link to="/members">members</Link></li>
+                   <li><Link to="/test">test</Link></li>
+                 </ul>
+               </aside>
+               
                  <div className="">
                    <div className="progress progress_sm">
                      <div className="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
@@ -88,13 +98,7 @@ class MainContent extends React.Component {
   
            <header className="primary-header"></header>
        
-           <aside className="primary-aside">
-             <ul>
-               <li><Link to="/">Home</Link></li>
-               <li><Link to="/about">Users</Link></li>
-               <li><Link to="/members">Widgets</Link></li>
-             </ul>
-           </aside>
+         
            <main>
              <div> content here  </div>      
            </main>

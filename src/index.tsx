@@ -15,21 +15,19 @@ import { Route, HashRouter, Switch } from 'react-router-dom';
 import {MembersPage} from './components/user/member';
 import {About } from './components/user/about';
 import {Main} from './components/user/main';
+import  App from './App';
+
 const store = createStore(rootReducer) 
 
 ReactDOM.render(
        
     <Provider store={store}> 
         
-    <div>     
-        <AdminTab />
-        <Footer />
-        <TopNavigation />
-        <TopTiles />  
+    <div>    
         
         <HashRouter>
         <div className="container-fluid">
-        <Route component={MainContent} />
+        <Route component={App} />
         <Switch>
             <Route exact path="/" component={MainContent} />
             <Route exact path="/admin" component={AdminTab} />
