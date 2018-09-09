@@ -14,17 +14,16 @@ import rootReducer from './reducers/index';
 import { Route, HashRouter, Switch } from 'react-router-dom';
 import {MembersPage} from './components/user/member';
 import {About } from './components/user/about';
-import {Main} from './components/user/main';
 import  App from './App';
+import UserContent from './components/user/main';
 
 const store = createStore(rootReducer) 
 
 ReactDOM.render(
-       
+           
     <Provider store={store}> 
-        
-    <div>    
-        
+
+    <div>            
         <HashRouter>
         <div className="container-fluid">
         <Route component={App} />
@@ -32,6 +31,7 @@ ReactDOM.render(
             <Route exact path="/" component={MainContent} />
             <Route exact path="/admin" component={AdminTab} />
             <Route path="/about" component={About} />
+            <Route path="/users" component={UserContent} />
             <Route path="/members" component={MembersPage} />
         </Switch>
         </div>

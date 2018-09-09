@@ -17,33 +17,16 @@ import MainContent from './components/content/mainContent';
 
 class App extends React.Component {
 
-    public render() {
-  
-          // let divWidthStyle:any = {           
-          //     width: "76%"
-          //   };
-          
-          // let divBackgroundStyle: any = {background: "#fff",
-          //  cursor: "pointer", padding: "5px 10px",
-          //   border: "1px solid #ccc"
-          // }
-  
-          return (   
-                       
-          
-
-    <div>     
-        <AdminTab />
-        <Footer />
-        <TopNavigation />
-        <TopTiles />  
-        
-    </div>);
-
-          }
-
-
+    public render() {  
+         
+        return (   
+            <div>     
+                <AdminTab />
+                <Footer />
+                <TopNavigation />
+                <TopTiles /> 
+            </div>);
+    }
 }
-
 
 export default App;

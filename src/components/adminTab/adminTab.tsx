@@ -39,13 +39,9 @@ class AdminTab extends React.Component {
                 
             }}> Click me! </button>
             </div>
-            </div>
+            </div>        
             
-            { /* menu profile quick info */}
-            
-            <br />
-            
-            { /*  sidebar menu */ }
+            <br />          
             
             <div id="sidebar-menu" className="main_menu_side hidden-print main_menu">
             <div className="menu_section">
@@ -53,7 +49,7 @@ class AdminTab extends React.Component {
             <ul className="nav side-menu">
             <li>
             <a>
-            <i className="fa fa-home"/> Home <span className="fa fa-chevron-down"/>
+            <i className="fa fa-home"/> <Link to="/">Home</Link> <span className="fa fa-chevron-down"/>
             
             </a>
             <ul className="nav child_menu">
@@ -65,7 +61,7 @@ class AdminTab extends React.Component {
             <li>
             
             
-            <a><i className="fa fa-edit"/> Forms <span className="fa fa-chevron-down"/>
+            <a><i className="fa fa-edit"/> <Link to="/users">Users</Link> <span className="fa fa-chevron-down"/>
             </a>
             <ul className="nav child_menu">
             <li><a href="form.html">General Form</a></li>
@@ -80,15 +76,8 @@ class AdminTab extends React.Component {
             
             </ul>
             </li>
-            
-            
-            
-            <li><a><i className="fa fa-clone"/>Layouts <span className="fa fa-chevron-down"/></a>
-            <ul className="nav child_menu">
-            <li><a href="fixed_sidebar.html">Fixed Sidebar</a></li>
-            <li><a href="fixed_footer.html">Fixed Footer</a></li>
-            </ul>
-            </li>
+                     
+
             </ul>
             </div>
             
