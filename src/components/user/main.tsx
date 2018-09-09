@@ -16,8 +16,7 @@ export const Main : React.StatelessComponent<{}> = () => {
       </ul>
     </aside>
     <main>
-      <div> content here  </div>
-      
+      <h1> content here  </h1>      
     </main>
 
   </div>

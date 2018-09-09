@@ -5,16 +5,16 @@ import { Route, HashRouter, Switch } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 class AdminTab extends React.Component {
-
+    
     public render() {
-
+        
         let a:any  = this.props;
         console.log(a.dispatch);
-
+        
         return (   
-                        
+            
             <div className="col-md-3 left_col">
-                        
+            
             <div className="left_col scroll-view">
             <div className="navbar nav_title" style={{border: 0}}>
             <a href="index.html" className="site_title"><i className="fa fa-paw"/> <span>Gentelella Alela!</span></a>
@@ -31,16 +31,16 @@ class AdminTab extends React.Component {
             <div className="profile_info">
             <span>Welcome111,</span>
             <h2>John Doe11</h2> 
-
+            
             <button onClick={() => {
-
+                
                 console.log('test');
                 a.dispatch(addUser('test'));
-                              
+                
             }}> Click me! </button>
             </div>
             </div>
-                        
+            
             { /* menu profile quick info */}
             
             <br />
@@ -52,8 +52,8 @@ class AdminTab extends React.Component {
             <h3>General</h3>
             <ul className="nav side-menu">
             <li>
-              <a>
-              <i className="fa fa-home"/> Home <span className="fa fa-chevron-down"/>
+            <a>
+            <i className="fa fa-home"/> Home <span className="fa fa-chevron-down"/>
             
             </a>
             <ul className="nav child_menu">
@@ -62,7 +62,11 @@ class AdminTab extends React.Component {
             <li><a href="index3.html">Dashboard3</a></li>
             </ul>
             </li>
-            <li><a><i className="fa fa-edit"/> Forms <span className="fa fa-chevron-down"/></a>
+            <li>
+            
+            
+            <a><i className="fa fa-edit"/> Forms <span className="fa fa-chevron-down"/>
+            </a>
             <ul className="nav child_menu">
             <li><a href="form.html">General Form</a></li>
             <li><a href="form_advanced.html">Advanced Components</a></li>
@@ -70,14 +74,15 @@ class AdminTab extends React.Component {
             <li><a href="form_wizards.html">Form Wizard</a></li>
             <li><a href="form_upload.html">Form Upload</a></li>
             <li><a href="form_buttons.html">Form Buttons</a></li>
-
-
-        
+            
+            
+            <li>Form Buttons </li>
+            
             </ul>
             </li>
-          
-           
-           
+            
+            
+            
             <li><a><i className="fa fa-clone"/>Layouts <span className="fa fa-chevron-down"/></a>
             <ul className="nav child_menu">
             <li><a href="fixed_sidebar.html">Fixed Sidebar</a></li>
@@ -86,8 +91,8 @@ class AdminTab extends React.Component {
             </li>
             </ul>
             </div>
-         
-                                   
+            
+            
             <div className="sidebar-footer hidden-small">
             <a data-toggle="tooltip" data-placement="top" title="Settings">
             <span className="glyphicon glyphicon-cog" aria-hidden="true"/>

@@ -21,26 +21,24 @@ ReactDOM.render(
        
     <Provider store={store}> 
         
-    <div>
-
-      <HashRouter>
-            <div className="container-fluid">
-            <Route component={Main} />
-            <Switch>
-                <Route exact path="/" component={Main} />
-                <Route path="/about" component={About} />
-                <Route path="/members" component={MembersPage} />
-            </Switch>
-            </div>
-        </HashRouter>
-
-
+    <div>     
         <AdminTab />
         <Footer />
         <TopNavigation />
-        <TopTiles />    
-        <MainContent />  
-        <TransactionSummary />    
+        <TopTiles />  
+        
+        <HashRouter>
+        <div className="container-fluid">
+        <Route component={MainContent} />
+        <Switch>
+            <Route exact path="/" component={MainContent} />
+            <Route exact path="/admin" component={AdminTab} />
+            <Route path="/about" component={About} />
+            <Route path="/members" component={MembersPage} />
+        </Switch>
+        </div>
+    </HashRouter>
+       
     </div>   
     </Provider>,
     document.getElementById("root")
