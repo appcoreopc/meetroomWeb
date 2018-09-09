@@ -58,8 +58,7 @@ class AdminTab extends React.Component {
             <li><a href="index3.html">Dashboard3</a></li>
             </ul>
             </li>
-            <li>
-            
+            <li>            
             
             <a><i className="fa fa-edit"/> <Link to="/users">Users</Link> <span className="fa fa-chevron-down"/>
             </a>
