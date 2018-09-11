@@ -15,7 +15,6 @@ import UserContent from './components/user/main';
 import userSaga from './components/user/usersaga';
 
 const sagaMiddleware = createSagaMiddleware();
-
 const store = createStore(rootReducer,  
     applyMiddleware(sagaMiddleware)
 );
