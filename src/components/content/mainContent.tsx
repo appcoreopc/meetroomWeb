@@ -2,24 +2,59 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { Table, Button} from 'antd';
 
-class MainContent extends React.Component {
+class MainContent extends React.Component<any, any> {
 
-    
+  selectedRowKeys = [];
+  loading : boolean  = false; 
+
+  constructor(props) { 
+    super(props);
+    this.state = {
+      selectedRowKeys: [], // Check here to configure the default column 
+      loading : false    
+    };
+  }
+
+  onSelectChange = (selectedRowKeys) => {
+    console.log('selectedRowKeys changed: ', selectedRowKeys);
+    this.setState({ selectedRowKeys });
+  }
+
+  start = () => { 
+    console.log('clicked');
+  }
+
   public render() {
 
-    const columns = [
-      { title: 'Name', dataIndex: 'name', key: 'name' },     
-      { title: 'Role', dataIndex: 'role', key: 'role' },
-      { title: 'Is Admin', dataIndex: '', key: 'x', render: () => <a href="javascript:;">Set Admin</a> },
-    ];
+    const { loading, selectedRowKeys } = this.state;    
+    const hasSelected = this.selectedRowKeys.length > 0;
 
-    const data = [
-      { key: 1, name: 'John Brown', role: 'user', address: 'New York No. 1 Lake Park', description: 'My name is John Brown, I am 32 years old, living in New York No. 1 Lake Park.' },
-      { key: 2, name: 'Jim Green', role: 'user', address: 'London No. 1 Lake Park', description: 'My name is Jim Green, I am 42 years old, living in London No. 1 Lake Park.' },
-      { key: 3, name: 'Joe Black', role: 'user', address: 'Sidney No. 1 Lake Park', description: 'My name is Joe Black, I am 32 years old, living in Sidney No. 1 Lake Park.' },
-    ];
+    const rowSelection = {
+      selectedRowKeys : selectedRowKeys,
+      onChange: this.onSelectChange
+    };
 
-        
+    const columns = [{
+      title: 'Name',
+      dataIndex: 'name',
+    }, {
+      title: 'Age',
+      dataIndex: 'age',
+    }, {
+      title: 'Address',
+      dataIndex: 'address',
+    }];
+    
+    const data = [];
+    for (let i = 0; i < 46; i++) {
+      data.push({
+        key: i,
+        name: `Edward King ${i}`,
+        age: 32,
+        address: `London, Park Lane no. ${i}`,
+      });
+    }
+           
     return (   
          
        <div className="row">
@@ -47,9 +82,24 @@ class MainContent extends React.Component {
            </div>
 
            <div className="col-md-6">
-            <div> <Button type="primary">Reload</Button></div>
-
-              <Table columns={columns} dataSource={data}   />
+            <div> 
+              
+            
+            
+            <Button
+            type="primary"
+            onClick={this.start}
+            disabled={!hasSelected}
+            loading={loading}
+          >
+            Reload
+          </Button>
+          <span style={{ marginLeft: 8 }}>
+            {hasSelected ? `Selected ${selectedRowKeys.length} items` : ''}
+          </span>
+        </div>
+        
+            <Table rowSelection={rowSelection} columns={columns} dataSource={data} />
 
                     
            </div>
