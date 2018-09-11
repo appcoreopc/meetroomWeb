@@ -9,8 +9,6 @@ async function* fetchUser(action) {
       console.log('ADD_USER user data -e');
       let api = new userApi();
       const user = await api.getUsers("a");
-      //console.log('fetching data from url');
-      //const user = yield call(api.getUsers, action);
       console.log('userdata', user);
       yield put({type: "USER_FETCH_SUCCEEDED", user: user});
     } catch (e) {
