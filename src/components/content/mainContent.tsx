@@ -4,7 +4,7 @@ import { Table, Button} from 'antd';
 
 class MainContent extends React.Component<any, any> {
 
-  selectedRowKeys = [];
+  //selectedRowKeys = [];
   loading : boolean  = false; 
 
   constructor(props) { 
@@ -27,8 +27,13 @@ class MainContent extends React.Component<any, any> {
   public render() {
 
     const { loading, selectedRowKeys } = this.state;    
-    const hasSelected = this.selectedRowKeys.length > 0;
 
+    console.log('rendering rendering...');
+
+    const hasSelected = selectedRowKeys.length > 0;
+
+    console.log(!hasSelected);
+    
     const rowSelection = {
       selectedRowKeys : selectedRowKeys,
       onChange: this.onSelectChange
@@ -86,16 +91,11 @@ class MainContent extends React.Component<any, any> {
               
             
             
-            <Button
-            type="primary"
-            onClick={this.start}
-            disabled={!hasSelected}
-            loading={loading}
-          >
+            <Button type="primary" onClick={this.start} disabled={!hasSelected} loading={loading}>
             Reload
           </Button>
           <span style={{ marginLeft: 8 }}>
-            {hasSelected ? `Selected ${selectedRowKeys.length} items` : ''}
+            {hasSelected ? 'Selected ${selectedRowKeys.length} items' : ''}
           </span>
         </div>
         
