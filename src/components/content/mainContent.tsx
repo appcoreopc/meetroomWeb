@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { Table, Button} from 'antd';
 
 class MainContent extends React.Component<any, any> {
-
   //selectedRowKeys = [];
   loading : boolean  = false; 
 
@@ -88,12 +87,8 @@ class MainContent extends React.Component<any, any> {
 
            <div className="col-md-6">
             <div> 
-              
             
-            
-            <Button type="primary" onClick={this.start} disabled={!hasSelected} loading={loading}>
-            Reload
-          </Button>
+            <Button type="primary" onClick={this.start} disabled={!hasSelected} loading={loading}> Set to Admin </Button>
           <span style={{ marginLeft: 8 }}>
             {hasSelected ? 'Selected ${selectedRowKeys.length} items' : ''}
           </span>
