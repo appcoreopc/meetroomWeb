@@ -1,19 +1,25 @@
 
+interface ISetUserRole { 
+    ids : Array<number>, 
+    role : number
+}
+
 class UserApi { 
- 
-    private getUserUrl: string = 'https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=22f66588d55e4db88dabda8f03aa598c';     
+     
+    private getUserUrl: string = 'http://meetroomserver.azurewebsites.net/users/all';    
+    
+    private updateUserUrl : string = '';
+
     private fetchSettings = {
         method: 'POST',
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
-        }
+        }        
     };
         
-    async getUsers(obj : any) {   
-                
-    debugger;
-
+    async getUsers(obj : any) {  
+                   
       console.log(obj);
       console.log('xxxx', this.getUserUrl);
       let result = await fetch(this.getUserUrl);
@@ -22,13 +28,16 @@ class UserApi {
       console.log(data);
       return data;  
     }
-    
-   async setUserRole(userId : number, roleId : number) {
+        
+   async setUserRole( roleObj : ISetUserRole) {                 
+      console.log(roleObj);    
+      let result = await fetch(this.updateUserUrl, this.fetchSettings);
+      let data = result.json();
+      console.log('data');
+      console.log(data);
+      return data;  
+    }    
 
-    let result = await fetch(this.getUserUrl, this.fetchSettings);
-    let data = result.json(); 
-    return data; 
-   }
 }
 
 export default UserApi;

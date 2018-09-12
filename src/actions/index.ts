@@ -1,10 +1,10 @@
-export const addUser = (text : string) => {
 
-    console.log('dispatching adduser');
+
+export const addUser = (text : string) => {   
     return {
-    type: 'ADD_USER',    
-    text
-    }    
+     type: 'ADD_USER',    
+     text
+    }   
 };
 
 export const removeUser = (text : string) => ({
@@ -21,3 +21,10 @@ export const refreshUser = (text : string) => ({
     type: 'REFRESH_USER',    
     text
 });
+
+export const setUserRole = (userIds : string[]) => ({
+    type: 'SET_USER_ROLE',    
+    userIds
+});
+
+
