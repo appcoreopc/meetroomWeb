@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Table, Button} from 'antd';
 import { connect } from 'react-redux';
 import { setUserRole } from '../../actions/index';
+import { fetchUser } from '../../actions/index';
 
 interface IUserApplicationState { 
 
@@ -28,8 +29,19 @@ class MainContent extends React.Component<any, any> {
     this.props.dispatch(setUserRole(selectedRowKeys))
     console.log('clicked');    
   }
-  
+
+  componentDidMount() {
+    debugger;
+    this.props.dispatch(fetchUser());
+  }
+
+  componentWillUpdate() {
+    console.log(this.state);
+  }
+   
   public render() {
+
+    let data = this.props.users;
 
     const { loading, selectedRowKeys } = this.state;
     console.log('rendering rendering...');    
@@ -42,25 +54,25 @@ class MainContent extends React.Component<any, any> {
     };
     
     const columns = [{
-      title: 'Name',
-      dataIndex: 'name',
+      title: 'Id',
+      dataIndex: 'Id',
     }, {
-      title: 'Age',
-      dataIndex: 'age',
+      title: 'Username',
+      dataIndex: 'username',
     }, {
-      title: 'Address',
-      dataIndex: 'address',
+      title: 'Role',
+      dataIndex: 'role',
     }];
     
-    const data = [];
-    for (let i = 0; i < 46; i++) {
-      data.push({
-        key: i,
-        name: `Edward King ${i}`,
-        age: 32,
-        address: `London, Park Lane no. ${i}`,
-      });
-    }
+    // data = [];
+    // for (let i = 0; i < 46; i++) {
+    //   data.push({
+    //     key: i,
+    //     name: `Edward King ${i}`,
+    //     age: 32,
+    //     address: `London, Park Lane no. ${i}`,
+    //   });
+    // }
     
     return (   
       
@@ -111,4 +123,10 @@ class MainContent extends React.Component<any, any> {
   }
 }
 
-export default connect()(MainContent);
+
+const mapStateToProps = (state : any) => ({
+  users: state.users
+})
+
+
+export default connect(mapStateToProps)(MainContent);

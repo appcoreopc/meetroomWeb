@@ -1,10 +1,15 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { Table } from 'antd';
+import { connect } from 'react-redux';
+
 
 export const UserMain : React.StatelessComponent<{}> = () => {
+
+  console.log(this.state);
+
   return (
-      
+       
     <div className="row">
     <div className="col-md-12 col-sm-12 col-xs-12">
     <div className="dashboard_graph">
@@ -99,4 +104,8 @@ export const UserMain : React.StatelessComponent<{}> = () => {
   );
 }
 
-export default UserMain;
+const mapStateToProps = (state : any) => ({
+  users: state.users
+})
+
+export default connect(mapStateToProps)(UserMain);

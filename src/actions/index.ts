@@ -7,6 +7,12 @@ export const addUser = (text : string) => {
     }   
 };
 
+export const fetchUser = () => {   
+    return {
+     type: 'FETCH_USER',    
+    }   
+};
+
 export const removeUser = (text : string) => ({
     type: 'REMOVE_USER',    
     text

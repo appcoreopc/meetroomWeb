@@ -6,9 +6,8 @@ interface ISetUserRole {
 
 class UserApi { 
      
-    private getUserUrl: string = 'http://meetroomserver.azurewebsites.net/users/all';    
-    
-    private updateUserUrl : string = '';
+    private getUserUrl: string = 'http://localhost:3000/users/all';        
+    private updateUserUrl : string = 'http://meetroomserver.azurewebsites.net/users/setRole';
 
     private fetchSettings = {
         method: 'POST',
