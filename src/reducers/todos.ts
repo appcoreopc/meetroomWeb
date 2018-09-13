@@ -6,14 +6,20 @@ interface ActionA {
     id : string
 }
 
-const todos = (state:any = [], action : Action) => {
+const todos = (state:any = [], action : any) => {
   switch (action.type) {
     case 'ADD_USER':
       console.log('ADD_USER');
       return state;   
     case 'USER_FETCH_SUCCEEDED':
-      console.log('USER_FETCH_SUCCEEDED', state);
-      return state;   
+      console.log('USER_FETCH_SUCCEEDED', action);
+      state.users = action.users;
+      state.success = true;
+      return {
+        users : action.users, 
+        success : true        
+      };
+     
     case 'FETCH_USER':
         console.log('FETCH_USER', state);
         return state;     

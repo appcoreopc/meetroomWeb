@@ -8,6 +8,8 @@ export const UserMain : React.StatelessComponent<{}> = () => {
 
   console.log(this.state);
 
+  console.log(this.props);
+
   return (
        
     <div className="row">

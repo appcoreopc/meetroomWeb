@@ -1,27 +1,30 @@
-import { call, put, takeEvery, takeLatest, ForkEffect } from 'redux-saga/effects'
-import { all, fork } from 'redux-saga/effects';
+import { call, put, takeEvery, takeLatest, ForkEffect, all, fork, take } from 'redux-saga/effects'
 import userApi from './apiRequest';
 
-export async function* fetchUser(action) { 
+export function* fetchUser(action) { 
   
   try {
     console.log('FETCH_USER user data -e', );
-    let api = new userApi();
-    const users = await api.getUsers("a");
-    console.log('USER_FETCH_SUCCEEDED', users);
-    yield put({type: 'USER_FETCH_SUCCEEDED', users: users});
+    //let api = new userApi();
+    //const users = await api.getUsers("a");
+    debugger;
+    const users = yield call(getUsers);    
+    yield put({type: 'USER_FETCH_SUCCEEDED', users: users });
   }
   catch (e) {
     yield put({type: 'USER_FETCH_ERROR', message: e.message});
-  }
-  
+  }  
 }
 
-export async function* updateUser(action) {
+function getUsers() {   
+ return fetch("http://localhost:3000/users/all");
+}
+    
+export function* updateUser(action) {
   try {
     console.log('UPDATE user data -e');
     let api = new userApi();
-    const user = await api.getUsers("a");   
+    const user = api.getUsers("a");   
     yield put({type: 'USER_UPDATE_SUCCEEDED', user: user});
     return user;
     

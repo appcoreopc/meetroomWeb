@@ -32,16 +32,34 @@ class MainContent extends React.Component<any, any> {
 
   componentDidMount() {
     debugger;
-    this.props.dispatch(fetchUser());
+    this.props.onNameChanged();
   }
 
   componentWillUpdate() {
     console.log(this.state);
   }
+
+  componentDidUpdate()
+  {
+
+    let data = this.props.users;
+
+    console.log('here we componentDidUpdate');
+
+    console.log(this.state);
+
+    console.log(this.props);
+  }
    
   public render() {
 
     let data = this.props.users;
+
+    console.log('here we goooooo');
+
+    console.log(this.state);
+
+    console.log(this.props);
 
     const { loading, selectedRowKeys } = this.state;
     console.log('rendering rendering...');    
@@ -82,7 +100,7 @@ class MainContent extends React.Component<any, any> {
       
       <div className="row x_title">
       <div className="col-md-6">
-      <h3>Network Activities <small>Graph title sub-title</small></h3>
+      <h3>Network Activities <small>Graph title sub-title - data data  {this.props.success} {this.props.length}</small></h3>
       </div>
       <div className="col-md-6">
       
@@ -123,10 +141,16 @@ class MainContent extends React.Component<any, any> {
   }
 }
 
-
 const mapStateToProps = (state : any) => ({
-  users: state.users
+  users: state.users,
+  success : state.success
 })
 
+function mapDispatchToProps(dispatch) {
+  return {
+    onNameChanged: (name) => dispatch({ type: 'FETCH_USER', payload: name }),
+    onEmailChanged: (email) => dispatch({ type: 'EMAIL_CHANGED', payload: email }),
+  }
+}
 
-export default connect(mapStateToProps)(MainContent);
+export default connect(mapStateToProps, mapDispatchToProps)(MainContent);
