@@ -100,7 +100,7 @@ class MainContent extends React.Component<any, any> {
       
       <div className="row x_title">
       <div className="col-md-6">
-      <h3>Network Activities <small>Graph title sub-title - data data  {this.props.success} {this.props.length}</small></h3>
+      <h3>Network Activities <small>Graph title sub-title - data data  {this.props.success}</small></h3>
       </div>
       <div className="col-md-6">
       
@@ -141,10 +141,13 @@ class MainContent extends React.Component<any, any> {
   }
 }
 
-const mapStateToProps = (state : any) => ({
-  users: state.users,
-  success : state.success
-})
+const mapStateToProps = (state : any) =>{
+  console.log('mapstate', state);
+  return ({
+    users: state.users,
+    success : state.success
+  })
+}
 
 function mapDispatchToProps(dispatch) {
   return {

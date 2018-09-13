@@ -6,7 +6,7 @@ interface ActionA {
     id : string
 }
 
-const todos = (state:any = [], action : any) => {
+const todosIt = (state:any = [], action : any) => {
   switch (action.type) {
     case 'ADD_USER':
       console.log('ADD_USER');
@@ -36,4 +36,4 @@ const todos = (state:any = [], action : any) => {
   }
 }
 ​
-export default todos
+export default todosIt
