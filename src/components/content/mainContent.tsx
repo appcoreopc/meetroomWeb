@@ -31,8 +31,7 @@ class MainContent extends React.Component<any, any> {
   }
 
   componentDidMount() {
-    debugger;
-    this.props.onNameChanged();
+     this.props.onNameChanged();
   }
 
   componentWillUpdate() {
@@ -41,24 +40,35 @@ class MainContent extends React.Component<any, any> {
 
   componentDidUpdate()
   {
-
     let data = this.props.users;
-
     console.log('here we componentDidUpdate');
-
     console.log(this.state);
-
     console.log(this.props);
   }
    
   public render() {
 
-    let data = this.props.users;
+    let data = [];
+    let success = false;
 
-    console.log('here we goooooo');
+    if (this.props.users && this.props.users.users)
+    {
+      let data  = this.props.users.users;
+      data.json().then(function(data) {
+        debugger;         
+        console.log(data);
+        });   
+    }
+
+    if (this.props.users.users && this.props.users.users) 
+    {
+      let a = this.props.users.success;
+      console.log(a)   
+    }
+
+    console.log('rendering');
 
     console.log(this.state);
-
     console.log(this.props);
 
     const { loading, selectedRowKeys } = this.state;
@@ -100,7 +110,7 @@ class MainContent extends React.Component<any, any> {
       
       <div className="row x_title">
       <div className="col-md-6">
-      <h3>Network Activities <small>Graph title sub-title - data data  {this.props.success}</small></h3>
+      <h3>Network Activities <small>Graph title sub-title - data data -- {success}</small></h3>
       </div>
       <div className="col-md-6">
       
@@ -142,10 +152,9 @@ class MainContent extends React.Component<any, any> {
 }
 
 const mapStateToProps = (state : any) =>{
-  console.log('mapstate', state);
+  console.log('mapstate', state.todos);
   return ({
-    users: state.users,
-    success : state.success
+    users: state.todos
   })
 }
 
