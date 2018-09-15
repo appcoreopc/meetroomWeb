@@ -3,7 +3,6 @@ import * as ReactDOM from "react-dom";
 import createSagaMiddleware from 'redux-saga'
 
 import AdminTab from './components/adminTab/adminTab';
-import MainContent from './components/content/mainContent';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import rootReducer from './reducers/index';
@@ -11,8 +10,9 @@ import { Route, HashRouter, Switch } from 'react-router-dom';
 import { MembersPage } from './components/user/member';
 import { About } from './components/user/about';
 import  App from './App';
-import UserContent from './components/user/main';
+import UserContent from './components/user/UserContent';
 import userSaga from './components/user/usersaga';
+
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(rootReducer,  
@@ -30,11 +30,8 @@ ReactDOM.render(
         <div className="container-fluid">
         <Route component={App} />
         <Switch>
-            <Route exact path="/" component={MainContent} />
-            <Route exact path="/admin" component={AdminTab} />
-            <Route path="/about" component={About} />
-            <Route path="/users" component={UserContent} />
-            <Route path="/members" component={MembersPage} />
+            <Route exact path="/" component={UserContent} />        
+            <Route path="/users" component={UserContent} />     
         </Switch>
         </div>
     </HashRouter>

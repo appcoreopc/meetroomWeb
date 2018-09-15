@@ -8,9 +8,7 @@ class AdminTab extends React.Component {
     
     public render() {
         
-        let a:any  = this.props;
-        console.log(a.dispatch);
-        
+              
         return (   
             
             <div className="col-md-3 left_col">
@@ -21,8 +19,7 @@ class AdminTab extends React.Component {
             </div>
             
             <div className="clearfix"/>
-            
-            { /* menu profile quick info */ }
+                    
             
             <div className="profile clearfix">
             <div className="profile_pic">
@@ -32,12 +29,6 @@ class AdminTab extends React.Component {
             <span>Welcome111,</span>
             <h2>John Doe11</h2> 
             
-            <button onClick={() => {
-                
-                console.log('test');
-                a.dispatch(addUser('test'));
-                
-            }}> Click me! </button>
             </div>
             </div>        
             

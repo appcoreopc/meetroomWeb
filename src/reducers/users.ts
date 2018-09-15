@@ -4,26 +4,38 @@ interface ActionA {
     type: string;
     text: string,
     id : string
-}
+}  
 
-const users = (state:any = [], action : Action) => {
+import { USER_FETCH_SUCCEEDED, FETCH_USER, ADD_USER, UPDATE_USER_ROLE,  UPDATE_USER_ROLE_SUCCEEDED } from '../constants';
+
+const users = (state:any = [], action : any) => {
+
   switch (action.type) {
-    case 'USER_FETCH_SUCCEEDED':
-      console.log('USER_FETCH_SUCCEEDED');
-      return 
-            state.users;
-      
-    case 'USER_FETCH_ERROR': 
-       console.log('test')
-    // case 'TOGGLE_TODO':
-    //   return state.map(todo =>
-    //     (todo.id === action.id)
-    //       ? {...todo, completed: !todo.completed}
-    //       : todo
-    //   )
+    case ADD_USER:
+      console.log(ADD_USER);
+      return state;   
+    case UPDATE_USER_ROLE:    
+      console.log(UPDATE_USER_ROLE);
+      return state;       
+    case UPDATE_USER_ROLE_SUCCEEDED:    
+      console.log(UPDATE_USER_ROLE_SUCCEEDED);
+      return state;         
+    case USER_FETCH_SUCCEEDED:
+      console.log(USER_FETCH_SUCCEEDED, action);
+      state.users = action.users;
+      state.success = true;
+
+      return {
+        users : action.users, 
+        success : true        
+      };
+     
+    case FETCH_USER:
+        console.log(FETCH_USER, state);
+        return state;     
     default:
-      return state
+      return state;
   }
 }
 ​
-export default users
+export default users;
