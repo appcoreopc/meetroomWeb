@@ -94,6 +94,13 @@ class MainContent extends React.Component<any, any> {
     }, {
       title: 'Role',
       dataIndex: 'role',
+      render: (text, record) => {
+
+        if (record.role == 1) 
+          return <span>Admin</span>
+        else 
+          return <span>Normal user</span>        
+      }
     }];
    
     
