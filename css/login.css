@@ -15,6 +15,16 @@ body, html {
     padding: 40px 40px;
 }
 
+
+.hidden { 
+    visibility: hidden;
+}
+
+
+.show {
+    visibility : visible;
+}
+
 .btn {
     font-weight: 700;
     height: 36px;
