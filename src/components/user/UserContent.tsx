@@ -4,6 +4,7 @@ import { Table, Button} from 'antd';
 import { connect } from 'react-redux';
 import { setUserRole } from '../../actions/index';
 import { fetchUser } from '../../actions/index';
+import { USER_FETCH_SUCCEEDED, FETCH_USER, ADD_USER, UPDATE_USER_ROLE,  UPDATE_USER_ROLE_SUCCEEDED } from '../../constants';
 
 interface IUserApplicationState { 
 
@@ -22,14 +23,25 @@ class MainContent extends React.Component<any, any> {
   }
     
   onSelectChange = (selectedRowKeys) => {
-    console.log('selectedRowKeys changed:', selectedRowKeys);
-    this.setState({ selectedRowKeys });
+      this.setState({ selectedRowKeys });
   }
   
   setAdmin = () => {     
-    const { selectedRowKeys } = this.state;       
-    this.props.dispatch(setUserRole(selectedRowKeys))
-    console.log('clicked');    
+
+    const { selectedRowKeys } = this.state;    
+
+    let userList = [];
+
+    if (selectedRowKeys) {
+
+      for (let index = 0; index < selectedRowKeys.length; index++) {
+        const userId = this.state.data[index].id;
+        userList.push(userId);        
+      }
+
+      if (userList && userList.length > 0)
+         this.props.onUserRoleUpdate(userList, 1);
+    }     
   }
 
   componentDidMount() {
@@ -99,17 +111,22 @@ class MainContent extends React.Component<any, any> {
           <div className="dashboard_graph">
           
           <div className="row x_title">
-          <div className="col-md-6">
+
+          <div className="col-md-2">
+          
+          </div>
+          <div className="col-md-4">
           <h3> <small>  Manage user - configure user profile to Adminisrator or normal user. </small></h3>
           </div>
-          <div className="col-md-6">
-          
+         
+          <div className="col-md-6">          
           <div id="reportrange" className="pull-right">
           <i className="glyphicon glyphicon-calendar fa fa-calendar"></i>
           <span>December 30, 2014 - January 28, 2015</span> <b className="caret"></b>
           </div>
           </div>
-      </div>      
+
+        </div>      
       
       <div className="row x_title">
           <div className="col-md-2 col-sm-12 col-xs-12">                
@@ -119,7 +136,7 @@ class MainContent extends React.Component<any, any> {
           <div> 
             <Button type="primary" onClick={this.setAdmin} disabled={!hasSelected} loading={loading}> Set to Admin </Button>
             <span style={{ marginLeft: 8 }}>
-            {hasSelected ? 'Selected ${selectedRowKeys.length} items' : ''}
+            {hasSelected ? `Selected ${selectedRowKeys.length} items` : ``}
             </span>
           </div>
           
@@ -157,7 +174,7 @@ const mapStateToProps = (state : any) => {
 function mapDispatchToProps(dispatch) {
   return {
     onNameChanged: (name) => dispatch({ type: 'FETCH_USER', payload: name }),
-    onEmailChanged: (email) => dispatch({ type: 'EMAIL_CHANGED', payload: email }),
+    onUserRoleUpdate: (usersId, role) => dispatch({ type: 'UPDATE_USER_ROLE', usersId: usersId, role : role }),
   }
 }
 

@@ -26,8 +26,8 @@ class MainContent extends React.Component<any, any> {
   
   setAdmin = () => {     
     const { selectedRowKeys } = this.state;       
-    this.props.dispatch(setUserRole(selectedRowKeys))
-    console.log('clicked');    
+    //this.props.dispatch(setUserRole(selectedRowKeys))
+    //console.log('clicked');    
   }
 
   componentDidMount() {

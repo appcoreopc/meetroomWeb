@@ -1,13 +1,9 @@
 import { call, put, takeEvery, takeLatest, ForkEffect, all, fork, take } from 'redux-saga/effects'
 import userApi from './apiRequest';
+import { USER_FETCH_SUCCEEDED, FETCH_USER, ADD_USER, UPDATE_USER_ROLE,  UPDATE_USER_ROLE_SUCCEEDED } from '../../constants';
 
-export function* fetchUser(action) { 
-  
-  try {
-    console.log('FETCH_USER user data -e', );
-    //let api = new userApi();
-    //const users = await api.getUsers("a");
-    debugger;
+export function* fetchUser(action) {   
+  try {    
     const users = yield call(getUsers);    
     yield put({type: 'USER_FETCH_SUCCEEDED', users: users });
   }
@@ -16,13 +12,29 @@ export function* fetchUser(action) {
   }  
 }
 
-function getUsers() {   
- return fetch("http://localhost:3000/users/all");
+function getUsers() {  
+
+  return fetch("http://localhost:3000/users/all");
 }
-    
+
+function updateUserRole(action) 
+{ 
+  console.log('update user action', action);
+  const fetchSettings = {
+    method: 'POST',
+    headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+    }        
+  };
+  let updateUserUrl : string = 'http://meetroomserver.azurewebsites.net/users/updateRole';
+  return fetch(this.updateUserUrl, this.fetchSettings);
+}
+
+
 export function* updateUser(action) {
   try {
-    console.log('UPDATE user data -e');
+   
     let api = new userApi();
     const user = api.getUsers("a");   
     yield put({type: 'USER_UPDATE_SUCCEEDED', user: user});
@@ -33,12 +45,14 @@ export function* updateUser(action) {
   }
 }
 
+
+
 export function* fetchUserSaga(): IterableIterator<ForkEffect> {
-  yield takeLatest("FETCH_USER", fetchUser);
+  yield takeLatest(FETCH_USER, fetchUser);
 }
 
 export  function* updateUserRoleSaga(): IterableIterator<ForkEffect> {
-  yield takeLatest("UPDATE_USER", updateUser);
+  yield takeLatest(UPDATE_USER_ROLE, updateUser);
 }
 
 export default function* root() {
