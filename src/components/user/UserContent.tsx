@@ -58,15 +58,11 @@ class MainContent extends React.Component<any, any> {
 
         if (stateTimestamp != propTimestamp)
         {
-
-            usersData.json().then(function(jsonData) {          
-            // data = jsonData;
+            usersData.json().then(function(jsonData) { 
             self.setState({
               data : jsonData,
               timestamp : propTimestamp           
-            });
-
-          //console.log(data);
+            });        
           }); 
         }
       }  
@@ -80,10 +76,8 @@ class MainContent extends React.Component<any, any> {
       onChange: this.onSelectChange
     };
     
-    const columns = [{
-      title: 'Id',
-      dataIndex: 'Id',
-    }, {
+    const columns = [
+    {
       title: 'Username',
       dataIndex: 'username',
     }, {
@@ -97,47 +91,45 @@ class MainContent extends React.Component<any, any> {
           return <span>Normal user</span>        
       }
     }];
-   
-    
+       
     return (   
       
       <div className="row">
-      <div className="col-md-12 col-sm-12 col-xs-12">
-      <div className="dashboard_graph">
-      
-      <div className="row x_title">
-      <div className="col-md-6">
-      <h3>Network Activities <small>Graph title sub-title - data data -- {success}</small></h3>
-      </div>
-      <div className="col-md-6">
-      
-      <div id="reportrange" className="pull-right">
-      <i className="glyphicon glyphicon-calendar fa fa-calendar"></i>
-      <span>December 30, 2014 - January 28, 2015</span> <b className="caret"></b>
-      </div>
-      </div>
+          <div className="col-md-12 col-sm-12 col-xs-12">
+          <div className="dashboard_graph">
+          
+          <div className="row x_title">
+          <div className="col-md-6">
+          <h3> <small>  Manage user - configure user profile to Adminisrator or normal user. </small></h3>
+          </div>
+          <div className="col-md-6">
+          
+          <div id="reportrange" className="pull-right">
+          <i className="glyphicon glyphicon-calendar fa fa-calendar"></i>
+          <span>December 30, 2014 - January 28, 2015</span> <b className="caret"></b>
+          </div>
+          </div>
       </div>      
       
       <div className="row x_title">
-      <div className="col-md-6">
-            
-      </div>
+          <div className="col-md-2 col-sm-12 col-xs-12">                
+          </div>
+          
+          <div className="col-md-10 col-sm-12 col-xs-12">
+          <div> 
+            <Button type="primary" onClick={this.setAdmin} disabled={!hasSelected} loading={loading}> Set to Admin </Button>
+            <span style={{ marginLeft: 8 }}>
+            {hasSelected ? 'Selected ${selectedRowKeys.length} items' : ''}
+            </span>
+          </div>
+          
+          <Table rowSelection={rowSelection} columns={columns} dataSource={this.state.data} />
+                
+          </div>
+      </div>      
       
-      <div className="col-md-6">
-      <div> 
-      
-      <Button type="primary" onClick={this.setAdmin} disabled={!hasSelected} loading={loading}> Set to Admin </Button>
-      <span style={{ marginLeft: 8 }}>
-      {hasSelected ? 'Selected ${selectedRowKeys.length} items' : ''}
-      </span>
+      <div className="clearfix">
       </div>
-      
-      <Table rowSelection={rowSelection} columns={columns} dataSource={this.state.data} />
-            
-      </div>
-      </div>
-      
-      <div className="clearfix"></div>
       
       </div>
       </div>
@@ -148,11 +140,9 @@ class MainContent extends React.Component<any, any> {
 }
 
 const mapStateToProps = (state : any) => {
-  console.log('mapping state property as we know it', state);
-  
+   
   if (state.users && state.users.users)
-  {
-    console.log('mapstate valid - 1', state.users.users);
+  {    
     return {
       users: state.users.users,
       success : state.users.success,
