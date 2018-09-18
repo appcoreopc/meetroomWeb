@@ -5,7 +5,7 @@ import { USER_FETCH_SUCCEEDED, FETCH_USER, ADD_USER, UPDATE_USER_ROLE,  UPDATE_U
 export function* fetchUser(action) {   
   try {    
     const users = yield call(getUsers);    
-    yield put({type: 'USER_FETCH_SUCCEEDED', users: users });
+    yield put({type: USER_FETCH_SUCCEEDED, users: users });
   }
   catch (e) {
     yield put({type: 'USER_FETCH_ERROR', message: e.message});
@@ -17,35 +17,32 @@ function getUsers() {
   return fetch("http://localhost:3000/users/all");
 }
 
-function updateUserRole(action) 
+function updateUserRoleService(action) 
 { 
   console.log('update user action', action);
+
   const fetchSettings = {
     method: 'POST',
     headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json',        
     }        
+    
   };
   let updateUserUrl : string = 'http://meetroomserver.azurewebsites.net/users/updateRole';
   return fetch(this.updateUserUrl, this.fetchSettings);
 }
 
-
 export function* updateUser(action) {
   try {
    
-    let api = new userApi();
-    const user = api.getUsers("a");   
-    yield put({type: 'USER_UPDATE_SUCCEEDED', user: user});
-    return user;
-    
+    const result = yield call(updateUserRoleService, action);        
+    yield put({type: UPDATE_USER_ROLE_SUCCEEDED, user: result});
+  
   } catch (e) {
     yield put({type: 'USER_UPDATE_ERROR', message: e.message});
   }
 }
-
-
 
 export function* fetchUserSaga(): IterableIterator<ForkEffect> {
   yield takeLatest(FETCH_USER, fetchUser);
