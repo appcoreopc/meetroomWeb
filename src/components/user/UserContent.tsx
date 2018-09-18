@@ -16,7 +16,8 @@ class MainContent extends React.Component<any, any> {
     this.state = {
       selectedRowKeys: [],
       loading : false, 
-      data : []   
+      data : [],
+      timestamp : 0 
     };
   }
     
@@ -35,21 +36,13 @@ class MainContent extends React.Component<any, any> {
      this.props.onNameChanged();
   }
 
-  componentWillUpdate() {
-    console.log(this.state);
-  }
-
   componentDidUpdate()
   {
     let data = this.props.users;
-    console.log('here we componentDidUpdate');
-    console.log(this.state);
-    console.log(this.props);
   }
    
   public render() {
 
-    
     let success = false;
     var self = this;
 
@@ -59,27 +52,29 @@ class MainContent extends React.Component<any, any> {
       if (this.props.success && this.props.success == true) {
      
         let usersData = this.props.users;        
-        usersData.json().then(function(jsonData) {  
 
-          // data = jsonData;
-          self.setState({
-            data : jsonData            
-          })
+        let stateTimestamp = this.state.timestamp; 
+        let propTimestamp = this.props.timestamp; 
+
+        if (stateTimestamp != propTimestamp)
+        {
+
+            usersData.json().then(function(jsonData) {          
+            // data = jsonData;
+            self.setState({
+              data : jsonData,
+              timestamp : propTimestamp           
+            });
+
           //console.log(data);
-        }); 
+          }); 
+        }
       }  
-    }
-        
-    // console.log('rendering');
+    }           
 
-    // console.log(this.state);
-    // console.log(this.props);
-
-    const { loading, selectedRowKeys } = this.state;
-    console.log('rendering rendering...');    
+    const { loading, selectedRowKeys } = this.state;  
     const hasSelected = selectedRowKeys.length > 0;
-    console.log(!hasSelected);
-    
+      
     const rowSelection = {
       selectedRowKeys : selectedRowKeys,
       onChange: this.onSelectChange
@@ -138,8 +133,7 @@ class MainContent extends React.Component<any, any> {
       </div>
       
       <Table rowSelection={rowSelection} columns={columns} dataSource={this.state.data} />
-      
-      
+            
       </div>
       </div>
       
@@ -161,7 +155,8 @@ const mapStateToProps = (state : any) => {
     console.log('mapstate valid - 1', state.users.users);
     return {
       users: state.users.users,
-      success : state.users.success
+      success : state.users.success,
+      timestamp : state.users.timestamp
     };
   }
   return {

@@ -24,10 +24,10 @@ const users = (state:any = [], action : any) => {
       console.log(USER_FETCH_SUCCEEDED, action);
       state.users = action.users;
       state.success = true;
-
       return {
         users : action.users, 
-        success : true        
+        success : true,
+        timestamp : Date.now()        
       };
      
     case FETCH_USER:
