@@ -21,15 +21,21 @@ function updateUserRoleService(action)
 { 
   console.log('update user action', action);
 
+  let userIds = action.userIds; 
+  let role = action.role;
+   
   const fetchSettings = {
     method: 'POST',
     headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json',        
-    }        
-    
+        'Content-Type': 'application/json',  
+    },
+    body: JSON.stringify({
+      usersId : userIds, 
+      role : role
+    })         
   };
-  let updateUserUrl : string = 'http://meetroomserver.azurewebsites.net/users/updateRole';
+  let updateUserUrl : string = 'http://localhost:3000/users/setAdmin';
   return fetch(this.updateUserUrl, this.fetchSettings);
 }
 
