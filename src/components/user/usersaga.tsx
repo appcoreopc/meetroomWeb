@@ -2,6 +2,7 @@ import { call, put, takeEvery, takeLatest, ForkEffect, all, fork, take } from 'r
 import userApi from './apiRequest';
 import { USER_FETCH_SUCCEEDED, FETCH_USER, ADD_USER, UPDATE_USER_ROLE,  UPDATE_USER_ROLE_SUCCEEDED } from '../../constants';
 
+
 export function* fetchUser(action) {   
   try {    
     const users = yield call(getUsers);    
@@ -13,7 +14,6 @@ export function* fetchUser(action) {
 }
 
 function getUsers() {  
-
   return fetch("http://localhost:3000/users/all");
 }
 
@@ -21,7 +21,7 @@ function updateUserRoleService(action)
 { 
   console.log('update user action', action);
 
-  let userIds = action.userIds; 
+  let userIds = action.usersId; 
   let role = action.role;
    
   const fetchSettings = {
@@ -36,14 +36,14 @@ function updateUserRoleService(action)
     })         
   };
   let updateUserUrl : string = 'http://localhost:3000/users/setAdmin';
-  return fetch(this.updateUserUrl, this.fetchSettings);
+  return fetch('http://localhost:3000/users/setAdmin', fetchSettings);
 }
 
 export function* updateUser(action) {
   try {
    
     const result = yield call(updateUserRoleService, action);        
-    yield put({type: UPDATE_USER_ROLE_SUCCEEDED, user: result});
+    yield put({type: UPDATE_USER_ROLE_SUCCEEDED, userRoleUpdate: result});
   
   } catch (e) {
     yield put({type: 'USER_UPDATE_ERROR', message: e.message});
