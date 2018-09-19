@@ -26,21 +26,19 @@ class MainContent extends React.Component<any, any> {
       this.setState({ selectedRowKeys });
   }
   
-  setAdmin = () => {     
+  setUserRole = (role: number) => {     
 
     const { selectedRowKeys } = this.state;    
-
     let userList = [];
 
     if (selectedRowKeys) {
-
       for (let index = 0; index < selectedRowKeys.length; index++) {
         const userId = this.state.data[index].id;
         userList.push(userId);        
       }
 
       if (userList && userList.length > 0)
-         this.props.onUserRoleUpdate(userList, 1);
+         this.props.onUserRoleUpdate(userList, role);
     }     
   }
 
@@ -134,7 +132,15 @@ class MainContent extends React.Component<any, any> {
           
           <div className="col-md-10 col-sm-12 col-xs-12">
           <div> 
-            <Button type="primary" onClick={this.setAdmin} disabled={!hasSelected} loading={loading}> Set to Admin </Button>
+
+            <Button type="primary" onClick={() => {
+              this.setUserRole(1);
+            }} disabled={!hasSelected} loading={loading}> Set to Admin </Button>
+            
+            
+             <Button type="primary" onClick={() => {
+              this.setUserRole(0);              
+            }} disabled={!hasSelected} loading={loading}> Set Normal User </Button>
             <span style={{ marginLeft: 8 }}>
             {hasSelected ? `Selected ${selectedRowKeys.length} items` : ``}
             </span>
