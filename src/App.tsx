@@ -1,5 +1,4 @@
 
-
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
@@ -14,6 +13,7 @@ import { Provider } from 'react-redux';
 import rootReducer from './reducers/index';
 import { Route, HashRouter, Switch } from 'react-router-dom';
 import MainContent from './components/content/mainContent';
+
 
 class App extends React.Component {
 
