@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import { addUser } from '../../actions/index';
 import { Route, HashRouter, Switch } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import {  FETCH_USERINFO } from '../../constants';
 
 class AdminTab extends React.Component {
     
     public render() {
-        
-              
+                      
         return (   
             
             <div className="col-md-3 left_col">
@@ -98,4 +98,27 @@ class AdminTab extends React.Component {
     }
 }
 
-export default connect()(AdminTab);
+const mapStateToProps = (state : any) => {
+   
+    if (state.users && state.users.users)
+    {    
+      return {
+        users: state.users.users,
+        success : state.users.success,
+        timestamp : state.users.timestamp,
+        updateOk : state.users.updateOk
+      };
+    }
+    return {
+      users: state
+    };
+  }
+  
+  function mapDispatchToProps(dispatch) {        
+    return {  
+      onUserPanelLoad : (name) => dispatch({ type: FETCH_USERINFO, userinfo : name })    
+    }
+  }
+
+export default connect(mapStateToProps, mapDispatchToProps)(AdminTab);
+

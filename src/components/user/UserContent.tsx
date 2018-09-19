@@ -1,13 +1,9 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
 import { Table, Button} from 'antd';
 import { connect } from 'react-redux';
-import { setUserRole } from '../../actions/index';
-import { fetchUser } from '../../actions/index';
-import { USER_FETCH_SUCCEEDED, FETCH_USER, ADD_USER, UPDATE_USER_ROLE,  UPDATE_USER_ROLE_SUCCEEDED } from '../../constants';
+import {  FETCH_USER, UPDATE_USER_ROLE } from '../../constants';
 
 interface IUserApplicationState { 
-
 }
 
 class MainContent extends React.Component<any, any> {
@@ -181,8 +177,9 @@ const mapStateToProps = (state : any) => {
 function mapDispatchToProps(dispatch) {
 
   return {
-
+    
     onNameChanged: (name) => dispatch({ type: FETCH_USER, payload: name }),
+
     onUserRoleUpdate: (usersId, role) => dispatch({ type: UPDATE_USER_ROLE, usersId: usersId, role : role }),
   }
 }

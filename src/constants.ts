@@ -13,3 +13,7 @@ export const USER_UPDATE_ERROR : string = "USER_UPDATE_ERROR";
 
 export const SPINNER_BUSY : string = "SPINNER_BUSY";
 export const SPINNER_NOT_BUSY : string = "SPINNER_NOT_BUSY";
+
+export const FETCH_USERINFO : string = "FETCH_USERINFO";
+export const FETCH_USERINFO_SUCCESS : string = "FETCH_USERINFO_SUCCESS";
+
