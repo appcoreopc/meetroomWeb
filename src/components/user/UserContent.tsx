@@ -169,7 +169,8 @@ const mapStateToProps = (state : any) => {
     return {
       users: state.users.users,
       success : state.users.success,
-      timestamp : state.users.timestamp
+      timestamp : state.users.timestamp,
+      updateOk : state.users.updateOk
     };
   }
   return {
