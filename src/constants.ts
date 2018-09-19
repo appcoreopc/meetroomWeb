@@ -10,3 +10,6 @@ export const AUTHENTICATE_USER_ERR: string = "AUTHENTICATE_USER_ERR";
 export const AUTHENTICATE_USER_SUCCESS: string = "AUTHENTICATE_USER_SUCCESS";
 
 export const USER_UPDATE_ERROR : string = "USER_UPDATE_ERROR";
+
+export const SPINNER_BUSY : string = "SPINNER_BUSY";
+export const SPINNER_NOT_BUSY : string = "SPINNER_NOT_BUSY";

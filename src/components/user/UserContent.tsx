@@ -178,9 +178,11 @@ const mapStateToProps = (state : any) => {
 }
 
 function mapDispatchToProps(dispatch) {
+
   return {
-    onNameChanged: (name) => dispatch({ type: 'FETCH_USER', payload: name }),
-    onUserRoleUpdate: (usersId, role) => dispatch({ type: 'UPDATE_USER_ROLE', usersId: usersId, role : role }),
+
+    onNameChanged: (name) => dispatch({ type: FETCH_USER, payload: name }),
+    onUserRoleUpdate: (usersId, role) => dispatch({ type: UPDATE_USER_ROLE, usersId: usersId, role : role }),
   }
 }
 

@@ -14,13 +14,12 @@ import rootReducer from './reducers/index';
 import { Route, HashRouter, Switch } from 'react-router-dom';
 import MainContent from './components/content/mainContent';
 
-
 class App extends React.Component {
 
     public render() {  
          
         return (   
-            <div>     
+            <div>  
                 <AdminTab />
                 <Footer />
                 <TopNavigation />
