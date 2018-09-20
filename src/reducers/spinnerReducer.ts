@@ -9,6 +9,8 @@ const spinner = (state:any = [], action : any) => {
     case SPINNER_BUSY:    
       console.log(SPINNER_BUSY);
       return state;
+    default:
+      return state;
   }
 }
 ​

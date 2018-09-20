@@ -3,6 +3,7 @@ import { Table, Button} from 'antd';
 import { connect } from 'react-redux';
 import {  FETCH_USER, UPDATE_USER_ROLE } from '../../constants';
 
+
 interface IUserApplicationState { 
 }
 
@@ -110,7 +111,10 @@ class MainContent extends React.Component<any, any> {
           
           </div>
           <div className="col-md-4">
-          <h3> <small>  Manage user - configure user profile to Adminisrator or normal user. </small></h3>
+          <h3> <small>  Manage user - configure user profile to Adminisrator or normal user. 
+          
+          
+          </small></h3>
           </div>
          
           <div className="col-md-6">          

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { addUser } from '../../actions/index';
 import { Route, HashRouter, Switch } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import {  FETCH_USERINFO } from '../../constants';
+import { FETCH_USERINFO } from '../../constants';
 
 class AdminTab extends React.Component {
     
