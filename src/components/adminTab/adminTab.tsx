@@ -7,6 +7,7 @@ import { FETCH_USERINFO } from '../../constants';
 
 class AdminTab extends React.Component {
     
+  
     public render() {
                       
         return (   
@@ -15,7 +16,7 @@ class AdminTab extends React.Component {
             
             <div className="left_col scroll-view">
             <div className="navbar nav_title" style={{border: 0}}>
-            <a href="index.html" className="site_title"><i className="fa fa-paw"/> <span>Gentelella Alela!</span></a>
+            <a href="index.html" className="site_title"><i className="fa fa-paw"/> <span> Meetroom Web</span></a>
             </div>
             
             <div className="clearfix"/>
@@ -26,7 +27,8 @@ class AdminTab extends React.Component {
             <img src="images/img.jpg" alt="..." className="img-circle profile_img" />
             </div>
             <div className="profile_info">
-            <span>Welcome111,</span>
+            <span>Welcome,</span>
+
             <h2>John Doe11</h2> 
             
             </div>
