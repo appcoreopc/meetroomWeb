@@ -24,6 +24,10 @@ class TopNavigation extends React.Component<any, any> {
       if (!loading)
          loading = false; 
 
+      let username = this.props.sysadmin.username; 
+      if (!username) 
+          username = '';
+
         return (   
                         
             <div className="top_nav">
@@ -39,7 +43,7 @@ class TopNavigation extends React.Component<any, any> {
                 <ul className="nav navbar-nav navbar-right">
                   <li className="">
                     <a href="javascript:;" className="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                      <img src="images/img.jpg" alt="" />John Doe
+                      <img src="images/img.jpg" alt="" />{username}
                       <span className=" fa fa-angle-down"></span>
                     </a>                  
                   </li>
@@ -62,13 +66,13 @@ class TopNavigation extends React.Component<any, any> {
 }
 
 const mapStateToProps = (state : any) => {
-
+  
   console.log('top navigations state - ', state)
  
   if (state && state.sysadmin)
   {    
     return {
-      sysadmin : state.sysadmin.sysadmin,     
+      sysadmin : state.sysadmin,    
       timestamp : state.sysadmin.timestamp
     };
   }
@@ -77,6 +81,7 @@ const mapStateToProps = (state : any) => {
 
 function mapDispatchToProps(dispatch) {        
   return {  
+
     onUserPanelLoad : (name) => dispatch({ type: FETCH_ADMIN_INFO, userinfo : name }),
     onBusy : () => dispatch({ type: ON_BUSY}),
     onNotBusy : () => dispatch({ type: ON_NOT_BUSY }),
