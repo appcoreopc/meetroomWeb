@@ -2,23 +2,21 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import createSagaMiddleware from 'redux-saga'
 
-import AdminTab from './components/adminTab/adminTab';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import rootReducer from './reducers/index';
 import { Route, HashRouter, Switch } from 'react-router-dom';
-import { MembersPage } from './components/user/member';
-import { About } from './components/user/about';
 import  App from './App';
 import UserContent from './components/user/userContent';
 import userSaga from './components/user/usersaga';
+import sysAdminSaga from './components/adminTab/sysAdminSaga';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(rootReducer,  
     applyMiddleware(sagaMiddleware)
 );
 
-sagaMiddleware.run(userSaga);
+sagaMiddleware.run(userSaga, sysAdminSaga);
 
 ReactDOM.render(
            

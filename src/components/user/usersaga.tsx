@@ -1,7 +1,6 @@
 import { call, put, takeEvery, takeLatest, ForkEffect, all, fork, take } from 'redux-saga/effects'
-import userApi from './apiRequest';
-import { USER_FETCH_SUCCEEDED, FETCH_USER, ADD_USER, UPDATE_USER_ROLE,  UPDATE_USER_ROLE_SUCCEEDED } from '../../constants';
-
+import { USER_FETCH_SUCCEEDED, FETCH_ADMIN_INFO, FETCH_ADMIN_INFO_SUCCESS, FETCH_USER, ADD_USER, UPDATE_USER_ROLE,  UPDATE_USER_ROLE_SUCCEEDED } from '../../constants';
+import { url } from 'inspector';
 
 export function* fetchUser(action) {   
   try {    
@@ -58,9 +57,36 @@ export  function* updateUserRoleSaga(): IterableIterator<ForkEffect> {
   yield takeLatest(UPDATE_USER_ROLE, updateUser);
 }
 
+///////////////
+
+export function* getSysAdmin(action) {   
+  try {    
+    console.log('initiating getsysadmin');
+    const users = yield call(getSysAdminUser, action.username);    
+    yield put({type: FETCH_ADMIN_INFO_SUCCESS, sysadmin : users });
+  }
+  catch (e) {
+    yield put({type: 'FETCH_ADMIN_INFO_ERRORs', message: e.message});
+  }  
+}
+
+function getSysAdminUser(name) {  
+  let urlPath = "http://localhost:3000/sysadmin/" + name;
+  console.log('sysadmin', urlPath);
+  return fetch(urlPath);
+}
+
+export function* fetchSysAdmin(): IterableIterator<ForkEffect> {
+  yield takeLatest(FETCH_ADMIN_INFO, getSysAdmin);
+}
+
+
+//////////////
+
 export default function* root() {
   yield all([
     fork(fetchUserSaga),
-    fork(updateUserRoleSaga)
+    fork(updateUserRoleSaga),
+    fork(fetchSysAdmin)
   ])
 }

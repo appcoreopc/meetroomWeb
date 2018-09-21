@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Spin } from 'antd';
-import { FETCH_USERINFO, ON_BUSY, ON_NOT_BUSY } from '../../constants';
+import { FETCH_ADMIN_INFO, ON_BUSY, ON_NOT_BUSY } from '../../constants';
 import { connect } from 'react-redux';
 
 class TopNavigation extends React.Component<any, any> {
@@ -61,27 +61,26 @@ class TopNavigation extends React.Component<any, any> {
     }
 }
 
-
 const mapStateToProps = (state : any) => {
-   
-  if (state && state.spinner)
+
+  console.log('top navigations state - ', state)
+ 
+  if (state && state.sysadmin)
   {    
-    return {     
-      loading : state.spinner.loading
+    return {
+      sysadmin : state.sysadmin.sysadmin,     
+      timestamp : state.sysadmin.timestamp
     };
   }
-  return {
-    admin: state
-  };
+  return state;   
 }
 
 function mapDispatchToProps(dispatch) {        
   return {  
-    onUserPanelLoad : (name) => dispatch({ type: FETCH_USERINFO, userinfo : name }),
+    onUserPanelLoad : (name) => dispatch({ type: FETCH_ADMIN_INFO, userinfo : name }),
     onBusy : () => dispatch({ type: ON_BUSY}),
     onNotBusy : () => dispatch({ type: ON_NOT_BUSY }),
   }
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps) (TopNavigation);

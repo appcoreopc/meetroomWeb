@@ -1,11 +1,3 @@
-type Action = ActionA;
-
-interface ActionA {
-    type: string;
-    text: string,
-    id : string
-}  
-
 import { USER_FETCH_SUCCEEDED, FETCH_USER, ADD_USER, UPDATE_USER_ROLE,  UPDATE_USER_ROLE_SUCCEEDED } from '../constants';
 
 const users = (state:any = [], action : any) => {

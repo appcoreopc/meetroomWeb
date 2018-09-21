@@ -3,12 +3,21 @@ import { connect } from 'react-redux';
 import { addUser } from '../../actions/index';
 import { Route, HashRouter, Switch } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { FETCH_USERINFO } from '../../constants';
+import { FETCH_ADMIN_INFO } from '../../constants';
 
-class AdminTab extends React.Component {
+class AdminTab extends React.Component<IAdminTabProps, any> {
     
+  constructor(props) {
+    super(props);
+  }
   
-    public render() {
+  componentDidMount() {
+   console.log('dispatching ...... admintab onuserpanelload');
+   this.props.onUserPanelLoad('jeremy');
+  
+  }
+  
+  public render() {
                       
         return (   
             
@@ -94,32 +103,33 @@ class AdminTab extends React.Component {
             </div>
             
             </div>
-            
-            
+                        
         );
     }
 }
 
 const mapStateToProps = (state : any) => {
+
+    console.log('admintab state - ', state)
    
-    if (state.users && state.users.users)
+    if (state && state.sysadmin)
     {    
       return {
-        users: state.users.users,
-        success : state.users.success,
-        timestamp : state.users.timestamp,
-        updateOk : state.users.updateOk
+        sysadmin : state.sysadmin.sysadmin,     
+        timestamp : state.sysadmin.timestamp
       };
     }
-    return {
-      users: state
-    };
+    return state;   
   }
   
   function mapDispatchToProps(dispatch) {        
     return {  
-      onUserPanelLoad : (name) => dispatch({ type: FETCH_USERINFO, userinfo : name })    
+      onUserPanelLoad : (name) => dispatch({ type: FETCH_ADMIN_INFO, username : name })    
     }
+  }
+
+  interface IAdminTabProps {
+     onUserPanelLoad(username : string) : void;
   }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AdminTab);
