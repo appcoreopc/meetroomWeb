@@ -10,13 +10,15 @@ const sysadmin = async (state:any = [], action : any) => {
       };
     case FETCH_ADMIN_INFO_SUCCESS:  
       let sysAdminUser =  await action.sysadmin.json();
-      console.log('printing data from result ', sysAdminUser);   
-      state = {
-        sysadmin : sysAdminUser, 
+      console.log('printing data from result ', sysAdminUser);  
+      let newstate = { ...state, 
+        sysadmin2 : sysAdminUser, 
         success : true,
-        timestamp : Date.now()        
+        timestamp : Date.now()     
       };    
-      return state;
+      console.log('newstate value', newstate);
+      return newstate;
+      //return state;
     default:
       return state;
   }

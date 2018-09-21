@@ -22,8 +22,8 @@ const users = (state:any = [], action : any) => {
          
     case USER_FETCH_SUCCEEDED:
       console.log(USER_FETCH_SUCCEEDED, action);
-      state.users = action.users;
-      state.success = true;
+      // state.users = action.users;
+      // state.success = true;
       return {
         users : action.users, 
         success : true,

@@ -5,7 +5,7 @@ import { Route, HashRouter, Switch } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { FETCH_ADMIN_INFO } from '../../constants';
 
-class AdminTab extends React.Component<IAdminTabProps, any> {
+class AdminTab extends React.Component<any, any> {
     
   constructor(props) {
     super(props);
@@ -18,6 +18,32 @@ class AdminTab extends React.Component<IAdminTabProps, any> {
   }
   
   public render() {
+
+    let success = false;
+    var self = this;
+
+    if (this.props.sysadmin)
+    {
+      //let data  = this.props.users;
+      if (this.props.success && this.props.success == true) {
+     
+        let usersData = this.props.sysadmin;        
+
+        let stateTimestamp = this.state.timestamp; 
+        let propTimestamp = this.props.timestamp; 
+
+        if (stateTimestamp != propTimestamp)
+        {
+            usersData.json().then(function(jsonData) { 
+            self.setState({
+              data : jsonData,
+              timestamp : propTimestamp           
+            });        
+          }); 
+        }
+      }  
+    }           
+
                       
         return (   
             
@@ -110,13 +136,20 @@ class AdminTab extends React.Component<IAdminTabProps, any> {
 
 const mapStateToProps = (state : any) => {
 
-    console.log('admintab state - ', state)
-   
-    if (state && state.sysadmin)
+    console.log('admintab state - ', state);
+    
+    Promise.resolve(state.sysadmin).then(function(value) {
+
+      console.log('promising promising ', value);
+
+    });
+
+
+    if (state && state.sysadmin != null)
     {    
       return {
-        sysadmin : state.sysadmin.sysadmin,     
-        timestamp : state.sysadmin.timestamp
+        sysadmin : state.sysadmin,     
+        timestamp : state.timestamp
       };
     }
     return state;   
