@@ -12,7 +12,8 @@ class AdminTab extends React.Component<any, any> {
     
     this.state = { 
       count : 1, 
-      username : 'username'
+      username : 'username',
+      avatarUrl : ''
     }
   }
   
@@ -24,6 +25,7 @@ class AdminTab extends React.Component<any, any> {
     
     let self = this;
     let username = '';
+    let avatarUrl = '';
     
     Promise.resolve(this.props.sysadmin).then(function(value) {
       
@@ -35,11 +37,13 @@ class AdminTab extends React.Component<any, any> {
         if (value.sysadmin) {
           
           username = value.sysadmin[0].username;
+          avatarUrl = value.sysadmin[0].avatarUrl;
           console.log('final user', username);
           
           self.setState({
             username : username,
-            timestamp : propTimestamp           
+            timestamp : propTimestamp, 
+            avatarUrl : avatarUrl           
           });      
           
         }      
@@ -61,12 +65,12 @@ class AdminTab extends React.Component<any, any> {
       
       <div className="profile clearfix">
       <div className="profile_pic">
-      <img src="images/img.jpg" alt="..." className="img-circle profile_img" />
+      <img src={this.state.avatarUrl} alt="..." className="img-circle profile_img" />
       </div>
       <div className="profile_info">
       <span>Welcome,</span>
       
-      <h2>John Doe aka - { this.state.count == null ? '' : this.state.count }  =>] {this.state.username} </h2> 
+      <h2>{this.state.username} </h2> 
       
       </div>
       </div>        

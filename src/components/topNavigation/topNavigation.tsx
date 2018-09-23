@@ -11,7 +11,8 @@ class TopNavigation extends React.Component<any, any> {
 
     this.state = {    
       username : '',
-      timestamp : 0 
+      timestamp : 0 ,
+      avatarUrl : ''
     };
 
   }
@@ -29,6 +30,7 @@ class TopNavigation extends React.Component<any, any> {
     
     let self = this;
     let username = '';
+    let avatarUrl = '';
     
     Promise.resolve(this.props.sysadmin).then(function(value) {
       
@@ -39,14 +41,14 @@ class TopNavigation extends React.Component<any, any> {
       {
         if (value.sysadmin) {
 
-          username = value.sysadmin[0].username;
-          console.log('final user', username);
-
+          username = value.sysadmin[0].username;         
+          avatarUrl = value.sysadmin[0].avatarUrl;  
+     
           self.setState({
             username : username,
-            timestamp : propTimestamp           
-          });      
-          
+            timestamp : propTimestamp,
+            avatarUrl : avatarUrl     
+          });    
         }      
       }
     });
@@ -76,7 +78,7 @@ class TopNavigation extends React.Component<any, any> {
       <ul className="nav navbar-nav navbar-right">
       <li className="">
       <a href="javascript:;" className="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-      <img src="images/img.jpg" alt="" />hi there ...{this.state.username}
+      <img src="images/img.jpg" alt="" />Hi, {this.state.username}
       <span className=" fa fa-angle-down"></span>
       </a>                  
       </li>
