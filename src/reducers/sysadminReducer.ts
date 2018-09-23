@@ -12,7 +12,7 @@ const sysadmin = async (state:any = [], action : any) => {
       let sysAdminUser =  await action.sysadmin.json();
       console.log('printing data from result ', sysAdminUser);  
       let newstate = { ...state, 
-        sysadmin2 : sysAdminUser, 
+        sysadmin : sysAdminUser, 
         success : true,
         timestamp : Date.now()     
       };    
