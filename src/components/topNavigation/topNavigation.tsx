@@ -8,17 +8,16 @@ class TopNavigation extends React.Component<any, any> {
   constructor(props) {
     
     super(props);   
-
+    
     this.state = {    
       username : '',
       timestamp : 0 ,
       avatarUrl : ''
-    };
-
+    };  
   }
   
   componentWillMount() { 
-      
+    
     this.setState(
       {
         loading : false
@@ -40,10 +39,10 @@ class TopNavigation extends React.Component<any, any> {
       if (stateTimestamp != propTimestamp)
       {
         if (value.sysadmin) {
-
+          
           username = value.sysadmin[0].username;         
           avatarUrl = value.sysadmin[0].avatarUrl;  
-     
+          
           self.setState({
             username : username,
             timestamp : propTimestamp,
@@ -78,7 +77,7 @@ class TopNavigation extends React.Component<any, any> {
       <ul className="nav navbar-nav navbar-right">
       <li className="">
       <a href="javascript:;" className="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-      <img src="images/img.jpg" alt="" />Hi, {this.state.username}
+      <img  src={this.state.avatarUrl} alt="" />Hi, {this.state.username}
       <span className=" fa fa-angle-down"></span>
       </a>                  
       </li>
@@ -102,10 +101,7 @@ class TopNavigation extends React.Component<any, any> {
 
 const mapStateToProps = (state : any) => {
   
-  Promise.resolve(state.sysadmin).then(function(value) {
-    
-    console.log('top nav promising ', value);
-    
+  Promise.resolve(state.sysadmin).then(function(value) {        
     return {
       sysadmin : state.sysadmin,     
       timestamp : state.timestamp,
