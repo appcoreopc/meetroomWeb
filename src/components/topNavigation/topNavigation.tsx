@@ -51,16 +51,13 @@ class TopNavigation extends React.Component<any, any> {
         }      
       }
     });
-    
-    
+        
     let loading = this.state.loading;
+    
     if (!loading)
-    loading = false; 
-    
-    console.log('username ', username);
-    
+      loading = false;        
     if (!username) 
-    username = '';
+      username = '';
     
     return (   
       
@@ -122,3 +119,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps) (TopNavigation);
+

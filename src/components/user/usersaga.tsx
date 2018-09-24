@@ -1,6 +1,6 @@
 import { call, put, takeEvery, takeLatest, ForkEffect, all, fork, take } from 'redux-saga/effects'
-import { USER_FETCH_SUCCEEDED, FETCH_ADMIN_INFO, FETCH_ADMIN_INFO_SUCCESS, FETCH_USER, ADD_USER, UPDATE_USER_ROLE,  UPDATE_USER_ROLE_SUCCEEDED } from '../../constants';
-import { url } from 'inspector';
+import { USER_FETCH_SUCCEEDED, FETCH_ADMIN_INFO, USER_FETCH_ERROR, FETCH_ADMIN_INFO_SUCCESS, FETCH_USER, ADD_USER, UPDATE_USER_ROLE,  UPDATE_USER_ROLE_SUCCEEDED } from '../../constants';
+import { UPDATE_SYSADMIN_URL, FETCH_USER_URL, GET_SYSADMIN_URL} from './resourceConstant';
 
 export function* fetchUser(action) {   
   try {    
@@ -8,12 +8,12 @@ export function* fetchUser(action) {
     yield put({type: USER_FETCH_SUCCEEDED, users: users });
   }
   catch (e) {
-    yield put({type: 'USER_FETCH_ERROR', message: e.message});
+    yield put({type: USER_FETCH_ERROR, message: e.message});
   }  
 }
 
 function getUsers() {  
-  return fetch("http://localhost:3000/users/all");
+  return fetch(FETCH_USER_URL);
 }
 
 function updateUserRoleService(action) 
@@ -34,8 +34,8 @@ function updateUserRoleService(action)
       role : role
     })         
   };
-  let updateUserUrl : string = 'http://localhost:3000/users/setAdmin';
-  return fetch('http://localhost:3000/users/setAdmin', fetchSettings);
+  let updateUserUrl : string = UPDATE_SYSADMIN_URL;
+  return fetch(updateUserUrl, fetchSettings);
 }
 
 export function* updateUser(action) {
@@ -71,7 +71,7 @@ export function* getSysAdmin(action) {
 }
 
 function getSysAdminUser(name) {  
-  let urlPath = "http://localhost:3000/sysadmin/" + name;
+  let urlPath = GET_SYSADMIN_URL + name;
   console.log('sysadmin', urlPath);
   return fetch(urlPath);
 }
@@ -79,7 +79,6 @@ function getSysAdminUser(name) {
 export function* fetchSysAdmin(): IterableIterator<ForkEffect> {
   yield takeLatest(FETCH_ADMIN_INFO, getSysAdmin);
 }
-
 
 //////////////
 
