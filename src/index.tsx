@@ -8,15 +8,14 @@ import rootReducer from './reducers/index';
 import { Route, HashRouter, Switch } from 'react-router-dom';
 import  App from './App';
 import UserContent from './components/user/userContent';
-import userSaga from './components/user/usersaga';
-import sysAdminSaga from './components/adminTab/sysAdminSaga';
+import rootSaga from './sagas/index';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(rootReducer,  
     applyMiddleware(sagaMiddleware)
 );
 
-sagaMiddleware.run(userSaga, sysAdminSaga);
+sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
            

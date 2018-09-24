@@ -18,7 +18,11 @@ class AdminTab extends React.Component<any, any> {
   }
   
   componentDidMount() {
-    this.props.onUserPanelLoad('jeremy');  
+
+    this.props.onUserPanelLoad('jeremy'); 
+    
+    this.props.onGetdata('test');
+    
   }
   
   public render() {
@@ -159,7 +163,10 @@ const mapStateToProps = (state : any) => {
 
 function mapDispatchToProps(dispatch) {        
   return {  
-    onUserPanelLoad : (name) => dispatch({ type: FETCH_ADMIN_INFO, username : name })    
+    onUserPanelLoad : (name) => dispatch({ type: FETCH_ADMIN_INFO, username : name }), 
+
+    onGetdata  : (name) => dispatch({ type: 'GET_DATA', username : name })  
+
   }
 }
 

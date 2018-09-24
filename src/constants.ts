@@ -17,8 +17,10 @@ export const SPINNER_NOT_BUSY : string = "SPINNER_NOT_BUSY";
 
 export const FETCH_ADMIN_INFO : string = "FETCH_ADMIN_INFO";
 export const FETCH_ADMIN_INFO_SUCCESS : string = "FETCH_ADMIN_INFO_SUCCESS";
+export const FETCH_ADMIN_INFO_ERROR : string = 'FETCH_ADMIN_INFO_ERROR';
 
 export const ON_BUSY : string = "ON_BUSY";
 export const ON_NOT_BUSY : string = "ON_NOT_BUSY";
+
 
 

@@ -1,6 +1,8 @@
 import { call, put, takeEvery, takeLatest, ForkEffect, all, fork, take } from 'redux-saga/effects'
-import { USER_FETCH_SUCCEEDED, FETCH_ADMIN_INFO, USER_FETCH_ERROR, FETCH_ADMIN_INFO_SUCCESS, FETCH_USER, ADD_USER, UPDATE_USER_ROLE,  UPDATE_USER_ROLE_SUCCEEDED } from '../../constants';
-import { UPDATE_SYSADMIN_URL, FETCH_USER_URL, GET_SYSADMIN_URL} from './resourceConstant';
+import { USER_FETCH_SUCCEEDED, FETCH_ADMIN_INFO_ERROR, FETCH_ADMIN_INFO, USER_FETCH_ERROR, USER_UPDATE_ERROR, FETCH_ADMIN_INFO_SUCCESS, FETCH_USER, ADD_USER, UPDATE_USER_ROLE,  UPDATE_USER_ROLE_SUCCEEDED } from '../constants';
+import { UPDATE_SYSADMIN_URL, FETCH_USER_URL, GET_SYSADMIN_URL} from '../components/user/resourceConstant';
+
+import getdataSaga from './sysadminSaga';
 
 export function* fetchUser(action) {   
   try {    
@@ -17,9 +19,7 @@ function getUsers() {
 }
 
 function updateUserRoleService(action) 
-{ 
-  console.log('update user action', action);
-
+{   
   let userIds = action.usersId; 
   let role = action.role;
    
@@ -45,7 +45,7 @@ export function* updateUser(action) {
     yield put({type: UPDATE_USER_ROLE_SUCCEEDED, userRoleUpdate: result});
   
   } catch (e) {
-    yield put({type: 'USER_UPDATE_ERROR', message: e.message});
+    yield put({type: USER_UPDATE_ERROR, message: e.message});
   }
 }
 
@@ -61,18 +61,17 @@ export  function* updateUserRoleSaga(): IterableIterator<ForkEffect> {
 
 export function* getSysAdmin(action) {   
   try {    
-    console.log('initiating getsysadmin');
+   
     const users = yield call(getSysAdminUser, action.username);    
     yield put({type: FETCH_ADMIN_INFO_SUCCESS, sysadmin : users });
   }
   catch (e) {
-    yield put({type: 'FETCH_ADMIN_INFO_ERRORs', message: e.message});
+    yield put({type: FETCH_ADMIN_INFO_ERROR, message: e.message});
   }  
 }
 
 function getSysAdminUser(name) {  
-  let urlPath = GET_SYSADMIN_URL + name;
-  console.log('sysadmin', urlPath);
+  let urlPath = GET_SYSADMIN_URL + name; 
   return fetch(urlPath);
 }
 
@@ -84,8 +83,12 @@ export function* fetchSysAdmin(): IterableIterator<ForkEffect> {
 
 export default function* root() {
   yield all([
-    fork(fetchUserSaga),
-    fork(updateUserRoleSaga),
-    fork(fetchSysAdmin)
+    //fork(fetchUserSaga),
+    //fork(updateUserRoleSaga),
+    //fork(fetchSysAdmin)
+    takeLatest(FETCH_ADMIN_INFO, getSysAdmin),
+    takeLatest(FETCH_USER, fetchUser),
+    takeLatest(UPDATE_USER_ROLE, updateUser),
+    fork(getdataSaga)
   ])
 }
