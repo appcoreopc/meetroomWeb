@@ -55,7 +55,6 @@ class MainContent extends React.Component<any, any> {
 
     if (this.props.users)
     {
-      //let data  = this.props.users;
       if (this.props.success && this.props.success == true) {
      
         let usersData = this.props.users;        
@@ -65,12 +64,10 @@ class MainContent extends React.Component<any, any> {
 
         if (stateTimestamp != propTimestamp)
         {
-            usersData.json().then(function(jsonData) { 
             self.setState({
-              data : jsonData,
+              data : usersData,
               timestamp : propTimestamp           
-            });        
-          }); 
+            });  
         }
       }  
     }           

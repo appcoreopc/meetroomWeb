@@ -15,7 +15,9 @@ export function* fetchUser(action) {
 }
 
 function getUsers() {  
-  return fetch(FETCH_USER_URL);
+  return fetch(FETCH_USER_URL).then(response => response.json())
+  .then(json => json);
+
 }
 
 function updateUserRoleService(action) 
