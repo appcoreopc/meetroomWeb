@@ -1,10 +1,14 @@
+
+
 import { call, put, takeEvery, takeLatest, ForkEffect, all, fork, take } from 'redux-saga/effects'
+import { FETCH_USER_URL} from '../components/user/resourceConstant';
 
 function* getSysAdmin(action) {   
   try {    
     console.log('are we getting called here??? - GETDATA');
-    const users = yield call(getSysAdminUser);    
-    yield put({type: 'GETDATA_OK', users: users });
+    const users = yield call(getSysAdminUser);  
+    console.log('data data', users);
+    yield put({type: 'GETDATA_OK', sysadmin : users });
   }
   catch (e) {
     yield put({type: 'GETDATA_ERROR', message: e.message});
@@ -12,8 +16,10 @@ function* getSysAdmin(action) {
 }
 
 function getSysAdminUser() {  
-  return fetch("http://localhost:3000/users/all");
+  return fetch(FETCH_USER_URL).then(response => response.json())
+  .then(json => json);
 }
+
 
 function* fetchSysAdmin(): IterableIterator<ForkEffect> {
 

@@ -1,5 +1,7 @@
 import { call, put, takeEvery, takeLatest, ForkEffect, all, fork, take } from 'redux-saga/effects'
-import { USER_FETCH_SUCCEEDED, FETCH_ADMIN_INFO_ERROR, FETCH_ADMIN_INFO, USER_FETCH_ERROR, USER_UPDATE_ERROR, FETCH_ADMIN_INFO_SUCCESS, FETCH_USER, ADD_USER, UPDATE_USER_ROLE,  UPDATE_USER_ROLE_SUCCEEDED } from '../constants';
+import { USER_FETCH_SUCCEEDED, FETCH_ADMIN_INFO_ERROR, 
+  FETCH_ADMIN_INFO, USER_FETCH_ERROR, USER_UPDATE_ERROR, FETCH_ADMIN_INFO_SUCCESS, 
+  FETCH_USER, ADD_USER, UPDATE_USER_ROLE,  UPDATE_USER_ROLE_SUCCEEDED } from '../constants';
 import { UPDATE_SYSADMIN_URL, FETCH_USER_URL, GET_SYSADMIN_URL} from '../components/user/resourceConstant';
 
 import getdataSaga from './sysadminSaga';
@@ -17,7 +19,6 @@ export function* fetchUser(action) {
 function getUsers() {  
   return fetch(FETCH_USER_URL).then(response => response.json())
   .then(json => json);
-
 }
 
 function updateUserRoleService(action) 

@@ -31,33 +31,20 @@ class TopNavigation extends React.Component<any, any> {
     let username = '';
     let avatarUrl = '';
     
-    Promise.resolve(this.props.sysadmin).then(function(value) {
-      
-      let stateTimestamp = self.state.timestamp; 
-      let propTimestamp = value.timestamp; 
-      
-      if (stateTimestamp != propTimestamp)
-      {
-        if (value.sysadmin) {
-          
-          username = value.sysadmin[0].username;         
-          avatarUrl = value.sysadmin[0].avatarUrl;  
-          
-          self.setState({
-            username : username,
-            timestamp : propTimestamp,
-            avatarUrl : avatarUrl     
-          });    
-        }      
-      }
-    });
         
     let loading = this.state.loading;
-    
-    if (!loading)
-      loading = false;        
-    if (!username) 
-      username = '';
+
+    let userObject = this.props.sysadmin.sysadmin;
+
+    if (userObject)
+    {
+      username = userObject[0].username;
+      avatarUrl = userObject.avatarUrl;
+      console.log('final user', username);
+    }
+
+
+   
     
     return (   
       
@@ -74,7 +61,7 @@ class TopNavigation extends React.Component<any, any> {
       <ul className="nav navbar-nav navbar-right">
       <li className="">
       <a href="javascript:;" className="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-      <img  src={this.state.avatarUrl} alt="" />Hi, {this.state.username}
+      <img  src={avatarUrl} alt="" />Hi, {username}
       <span className=" fa fa-angle-down"></span>
       </a>                  
       </li>
@@ -97,16 +84,11 @@ class TopNavigation extends React.Component<any, any> {
 }
 
 const mapStateToProps = (state : any) => {
-  
-  Promise.resolve(state.sysadmin).then(function(value) {        
-    return {
-      sysadmin : state.sysadmin,     
-      timestamp : state.timestamp,
-      success : state.success
-    };
-  });
-  
-  return state;   
+  return {
+    sysadmin : state.getdatareducer,     
+    //timestamp : state.timestamp,
+    //success : state.success
+  };
 }
 
 function mapDispatchToProps(dispatch) {        

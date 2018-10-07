@@ -31,28 +31,14 @@ class AdminTab extends React.Component<any, any> {
     let username = '';
     let avatarUrl = '';
     
-    Promise.resolve(this.props.sysadmin).then(function(value) {
-      
-      let stateTimestamp = self.state.timestamp; 
-      let propTimestamp = value.timestamp; 
-      
-      if (stateTimestamp != propTimestamp)
-      {
-        if (value.sysadmin) {
-          
-          username = value.sysadmin[0].username;
-          avatarUrl = value.sysadmin[0].avatarUrl;
-          console.log('final user', username);
-          
-          self.setState({
-            username : username,
-            timestamp : propTimestamp, 
-            avatarUrl : avatarUrl           
-          });      
-          
-        }      
-      }
-    });
+    let userObject = this.props.sysadmin.sysadmin;
+    
+    if (userObject)
+    {
+      username = userObject[0].username;
+      avatarUrl = userObject.avatarUrl;
+      console.log('final user', username);
+    }
     
     
     return (   
@@ -69,12 +55,12 @@ class AdminTab extends React.Component<any, any> {
       
       <div className="profile clearfix">
       <div className="profile_pic">
-      <img src={this.state.avatarUrl} alt="..." className="img-circle profile_img" />
+      <img src={avatarUrl} alt="..." className="img-circle profile_img" />
       </div>
       <div className="profile_info">
       <span>Welcome,</span>
       
-      <h2>{this.state.username} </h2> 
+      <h2>{username} </h2> 
       
       </div>
       </div>        
@@ -147,26 +133,20 @@ class AdminTab extends React.Component<any, any> {
 
 const mapStateToProps = (state : any) => {
   
-  Promise.resolve(state.sysadmin).then(function(value) {
-    
-    console.log('promising promising ', value);
-    
-    return {
-      sysadmin : state.sysadmin,     
-      timestamp : state.timestamp,
-      success : state.success
-    };
-  });
+  //console.log('statetoprop:', state);       
+  return {
+    sysadmin : state.getdatareducer  
+    // timestamp : state.timestamp,
+    //success : state.success
+  };
   
-  return state;   
+  // return state;   
 }
 
 function mapDispatchToProps(dispatch) {        
   return {  
     onUserPanelLoad : (name) => dispatch({ type: FETCH_ADMIN_INFO, username : name }), 
-
     onGetdata  : (name) => dispatch({ type: 'GET_DATA', username : name })  
-
   }
 }
 
